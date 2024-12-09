@@ -11,9 +11,7 @@ function Navbar() {
       <div className={`menu ${isOpen ? "open" : ""}`}> {/* Conditional class for toggling menu */}
         <a href="/events">Events</a>
         <a href="/theater">Theater</a>
-        <a href="/sports">Sports</a>
-        <a href="/other">Other</a>
-        <a href="/deals">Deals</a>
+        
         <button className="register-btn">Register</button>
         <button className="signin-btn">Sign In</button>
       </div>
