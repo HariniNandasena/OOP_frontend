@@ -17,7 +17,7 @@ const events = [
 
 function Modal({ event, closeModal, ticketCount, setTicketCount }) {
   const handleTicketChange = (increment) => {
-    setTicketCount(prev => Math.max(0, prev + increment)); // Prevent negative ticket counts
+    setTicketCount(prev => Math.max(0, prev + increment)); 
   };
 
   const totalPrice = ticketCount * parseInt(event.price);
@@ -47,7 +47,7 @@ function Sectwo() {
 
   const openModal = (event) => {
     setSelectedEvent(event);
-    setTicketCount(0); // Reset ticket count every time modal opens
+    setTicketCount(0); 
     setShowModal(true);
   };
 

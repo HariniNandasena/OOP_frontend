@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.css';  // Link to the external CSS file
+import './Footer.css';
 
 function Footer() {
   return (
@@ -16,7 +16,7 @@ function Footer() {
           </div>
           <div className="email">
             <h3>EMAIL</h3>
-            <a href="mailto:hotel@unseen.travel">tickethub@gmail.com</a>
+            <a href="mailto:tickethub@gmail.com">tickethub@gmail.com</a>
           </div>
           <div className="social">
             <h3>SOCIAL</h3>
@@ -28,7 +28,6 @@ function Footer() {
           </div>
         </div>
         <div className="bottom-content">
-
           <div className="links">
             <a href="#">PRIVACY</a>
             <a href="#">TERMS OF USE</a>
