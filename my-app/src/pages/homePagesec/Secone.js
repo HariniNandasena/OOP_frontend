@@ -1,5 +1,5 @@
 import React from 'react';
-import './Secone.css'; // Import the CSS for styling
+import './Secone.css';
 
 function Secone() {
   return (
