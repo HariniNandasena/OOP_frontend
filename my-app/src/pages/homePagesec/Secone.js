@@ -15,6 +15,15 @@ function Secone() {
   // Sample activity log data
   const activityLog = [
     { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
+    { id: 1, action: 'Ticket Price Updated' },
 
   ];
 
