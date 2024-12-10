@@ -1,79 +1,61 @@
-.search-container {
-  background-color: #0056b3;
-  color: white;
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.config-container {
+  background-color: white;
+  color: black;
   padding: 20px;
-  text-align: center;
+  text-align: left;
+  width: 500px;
+  height: 500px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.search-container h1 {
-  font-size: 32px; 
-  margin-bottom: 10px;
-}
-
-.search-container p {
+.config-container h1 {
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
-.search-bar {
+.config-form {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  flex-direction: column;
 }
 
-.search-bar input {
-  padding: 10px;
-  width: 30%; 
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
+.config-form label {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Adjust this value to increase or decrease the space */
 }
 
-.search-bar button {
+.config-form input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.config-form button {
   padding: 10px 20px;
-  background-color: white;
-  color: #0056b3;
+  background-color: #0056b3;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  margin-top: 20px;
 }
 
-.search-bar input:focus, .search-bar button:focus {
-  outline: none;
+.config-form button:hover {
+  background-color: #003d7a;
 }
-
-.search-bar button:hover {
-  background-color: #e8f0fe;
-}
-
-@media (max-width: 768px) {
-  .search-bar {
-      flex-direction: column;
-      width: 100%;
-  }
-
-  .search-bar input,
-  .search-bar button {
-      width: 90%;
-  }
-
-  .search-container h1 {
-      font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-container {
-      padding: 15px; 
-  }
-
-  .search-container h1 {
-      font-size: 20px;
-  }
-
-  .search-container p {
-      font-size: 14px; 
-  }
+.btnsubmit{
+  margin-top: 20px;
 }
