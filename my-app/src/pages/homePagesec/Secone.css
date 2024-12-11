@@ -68,3 +68,10 @@ body, html {
   margin-right: 0; /* Ensure the last button doesn't have extra margin on the right */
 }
 
+.topic{
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 20px;
+  background-color: #4f86bc7c;
+}
+

@@ -1,156 +1,25 @@
-.events-section {
-  padding: 20px;
-  background-color: #f5f5f5;
-  text-align: center;
-}
-
-.events-navigation button {
-  margin: 0 10px;
-  padding: 8px 16px;
-  background-color: blue;
+/* Navbar.css */
+.navbar {
+  background-color: #0D47A1; /* Dark blue background */
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.events-navigation button:hover {
-  background-color: darkblue;
-}
-
-.events-carousel {
-  display: grid; 
-  padding: 20px 0;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-  justify-items: center; 
-}
-
-.event-card {
-  width: 100%;
-  height: 450px; 
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background-color: white;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.event-card img {
-  width: 100%; 
-  height: 200px; 
-  object-fit: cover; 
-}
-
-.event-card h3 {
-  margin: 10px 0;
-  color: #333;
-}
-
-.event-card p {
-  color: #666;
-  font-size: 14px;
-}
-
-.event-card button {
   padding: 10px 20px;
-  margin-top: auto; 
-  background-color: red;
+  align-items: center;
+  width: 100%; /* Ensures it fills the row */
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-links a {
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
+  margin-left: 20px;
 }
 
-.event-card button:hover {
-  background-color: darkred;
+.navbar-links a:hover {
+  text-decoration: underline;
 }
-
-/* --- Mobile Views --- */
-@media (max-width: 480px) {
-  .events-carousel {
-    grid-template-columns: 1fr; 
-  }
-
-  .event-card {
-    height: 400px; 
-  }
-
-  .events-navigation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .events-carousel {
-    grid-template-columns: repeat(2, 1fr); 
-  }
-
-  .event-card {
-    height: 420px; 
-  }
-
-  .events-navigation {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-@media (min-width: 1024px) {
-  .events-carousel {
-    grid-template-columns: repeat(5, 1fr); 
-  }
-
-  .event-card {
-    height: 450px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  text-align: center;
-}
-
-.ticket-selector {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.ticket-selector button {
-  padding: 5px 10px;
-  font-size: 16px;
-}
-
