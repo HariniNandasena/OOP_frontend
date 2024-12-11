@@ -3,28 +3,20 @@ import './Secone.css';
 
 function Secone() {
   const [formData, setFormData] = useState({
-    eventName: '',
+    //eventName: '',
     totalTickets: '',
     ticketReleaseRate: '',
     customerRetrievalRate: '',
     maxTicketCapacity: '',
-    ticketPrice: ''
+    numVendors: '',
+    numCustomers: ''
+    //ticketPrice: ''
   });
   const [showModal, setShowModal] = useState(false);
 
   // Sample activity log data
   const activityLog = [
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-    { id: 1, action: 'Ticket Price Updated' },
-
+    { id: 1, action: 'Ticket Price Updated' }
   ];
 
   const handleChange = (event) => {
@@ -54,7 +46,7 @@ function Secone() {
     <div className="config-container">
       <h1>Event Configuration</h1>
       <form className="config-form" onSubmit={handleSubmit}>
-      <label>
+      {/* <label>
         Event Name:
         <input
           type="text"
@@ -62,7 +54,7 @@ function Secone() {
           value={formData.eventName}
           onChange={handleChange}
         />
-      </label>
+      </label> */}
       <label>
         Total Tickets:
         <input
@@ -100,11 +92,20 @@ function Secone() {
         />
       </label>
       <label>
-        Ticket Price:
+        Number of Vendors:
         <input
           type="number"
-          name="ticketPrice"
-          value={formData.ticketPrice}
+          name="numVendors"
+          value={formData.numVendors}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Number of Customers:
+        <input
+          type="number"
+          name="numCustomers"
+          value={formData.numCustomers}
           onChange={handleChange}
         />
       </label>
@@ -125,12 +126,13 @@ function Secone() {
                 </button>
               </div>
               <div className="modal-body">
-                <p>Event Name: {formData.eventName}</p>
+                {/* <p>Event Name: {formData.eventName}</p> */}
                 <p>Total Tickets: {formData.totalTickets}</p>
                 <p>Ticket Release Rate: {formData.ticketReleaseRate}</p>
                 <p>Customer Retrieval Rate: {formData.customerRetrievalRate}</p>
                 <p>Max Ticket Capacity: {formData.maxTicketCapacity}</p>
-                <p>Ticket Price: {formData.ticketPrice}</p>
+                <p>Number of Vendors: {formData.numVendors}</p>
+                <p>Number of Customers: {formData.numCustomers}</p>
 
                 <div className="control-buttons">
                   <button onClick={handleStart} className="btn btn-success" >Start</button>
