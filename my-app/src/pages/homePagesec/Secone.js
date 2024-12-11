@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Secone.css';
 
 function Secone() {
   const [formData, setFormData] = useState({
-    //eventName: '',
     totalTickets: '',
     ticketReleaseRate: '',
     customerRetrievalRate: '',
     maxTicketCapacity: '',
     numVendors: '',
     numCustomers: ''
-    //ticketPrice: ''
   });
   const [showModal, setShowModal] = useState(false);
+  const [activityLog, setActivityLog] = useState([]);
+  const [socket, setSocket] = useState(null); // WebSocket
 
-  // Sample activity log data
-  const activityLog = [
-    { id: 1, action: 'Ticket Price Updated' }
-  ];
+  useEffect(() => {
+    // WebSocket connection for logs
+    const ws = new WebSocket("ws://localhost:8080/ws/logs");
+
+    ws.onmessage = (event) => {
+      setActivityLog((prevLogs) => [...prevLogs, { action: event.data }]);
+    };
+
+    ws.onclose = () => console.log("WebSocket disconnected");
+
+    setSocket(ws);
+
+    return () => {
+      if (ws) ws.close();
+    };
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,18 +40,38 @@ function Secone() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      // Send updated configuration to backend
+      const response = await axios.post("http://localhost:8080/api/confoguration/update", formData);
+      console.log(response.data);
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error updating configuration:", error);
+    }
     setShowModal(true);
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
     console.log("Start action triggered");
+    try {
+      const response = await axios.post("http://localhost:8080/api/simulation/start");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error starting simulation:", error);
+    }
     // Add functionality for start action
   };
 
-  const handleStop = () => {
+  const handleStop = async () => {
     console.log("Stop action triggered");
+    try {
+      const response = await axios.post("http://localhost:8080/api/simulation/stop");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error stopping simulation:", error);
+    }
     // Add functionality for stop action
   };
 
@@ -48,15 +81,7 @@ function Secone() {
       <div className="config-container">
         <h1>Event Configuration</h1>
         <form className="config-form" onSubmit={handleSubmit}>
-          {/* <label>
-        Event Name:
-        <input
-          type="text"
-          name="eventName"
-          value={formData.eventName}
-          onChange={handleChange}
-        />
-      </label> */}
+
           <label>
             Total Tickets:
             <input
@@ -128,7 +153,7 @@ function Secone() {
                   </button>
                 </div>
                 <div className="modal-body">
-                  {/* <p>Event Name: {formData.eventName}</p> */}
+  
                   <p>Total Tickets: {formData.totalTickets}</p>
                   <p>Ticket Release Rate: {formData.ticketReleaseRate}</p>
                   <p>Customer Retrieval Rate: {formData.customerRetrievalRate}</p>
