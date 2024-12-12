@@ -12,26 +12,30 @@ function Secone() {
     numCustomers: '',
     ticketsToSell: ''
   });
+
+  const [logs, setLogs] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [activityLog, setActivityLog] = useState([]);
   const [socket, setSocket] = useState(null); // WebSocket
 
   useEffect(() => {
-    // WebSocket connection for logs
-    const ws = new WebSocket("ws://localhost:8080/ws/logs");
-
-    ws.onmessage = (event) => {
-      setActivityLog((prevLogs) => [...prevLogs, { action: event.data }]);
+    const fetchConfiguration = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/configuration");
+        if (response.ok) {
+          const data = await response.json();
+          setFormData(data); // Set the fetched configuration data
+        } else {
+          console.error("Failed to fetch configuration");
+        }
+      } catch (error) {
+        console.error("Error fetching configuration:", error);
+      }
     };
 
-    ws.onclose = () => console.log("WebSocket disconnected");
-
-    setSocket(ws);
-
-    return () => {
-      if (ws) ws.close();
-    };
+    fetchConfiguration();
   }, []);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,21 +48,32 @@ function Secone() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Send updated configuration to backend
-      const response = await axios.post("http://localhost:8080/api/confoguration/update", formData);
-      console.log(response.data);
-      setShowModal(true);
+      const response = await fetch("http://localhost:8080/api/configuration/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setShowModal(true);
+        console.log("Configuration updated successfully.");
+      } else {
+        console.error("Failed to update configuration.");
+      }
     } catch (error) {
       console.error("Error updating configuration:", error);
     }
-    setShowModal(true);
   };
 
   const handleStart = async () => {
-    console.log("Start action triggered");
     try {
-      const response = await axios.post("http://localhost:8080/api/simulation/start");
-      console.log(response.data);
+      const response = await fetch("http://localhost:8080/api/simulation/start", { method: "POST" });
+      if (response.ok) {
+        console.log("Simulation started successfully");
+        connectWebSocket();
+      } else {
+        console.error("Failed to start simulation");
+      }
     } catch (error) {
       console.error("Error starting simulation:", error);
     }
@@ -66,14 +81,35 @@ function Secone() {
   };
 
   const handleStop = async () => {
-    console.log("Stop action triggered");
     try {
-      const response = await axios.post("http://localhost:8080/api/simulation/stop");
-      console.log(response.data);
+      const response = await fetch("http://localhost:8080/api/simulation/stop", { method: "POST" });
+      if (response.ok) {
+        console.log("Simulation stopped successfully");
+      } if(socket) socket.close();
+        
     } catch (error) {
       console.error("Error stopping simulation:", error);
     }
     // Add functionality for stop action
+  };
+
+  // Establish WebSocket connection
+  const connectWebSocket = () => {
+    const ws = new WebSocket('ws://localhost:8080/ws/logs');
+    setSocket(ws);
+
+    ws.onmessage = (event) => {
+      console.log("Log received:", event.data);
+      setActivityLog((prevLogs) => [...prevLogs, { id: prevLogs.length + 1, action: event.data }]);
+    };
+
+    ws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket connection closed.");
+    };
   };
 
   return (
@@ -189,13 +225,9 @@ function Secone() {
                         </tr>
                       </thead>
                       <tbody>
-                        {activityLog.map(log => (
-                          <tr key={log.id}>
-
-                            <td>{log.action}</td>
-
-                          </tr>
-                        ))}
+                      {activityLog.map((log) => (
+                      <li key={log.id} className="list-group-item">{log.action}</li>
+                    ))}
                       </tbody>
                     </table>
                   </div>
