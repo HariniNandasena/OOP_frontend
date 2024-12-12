@@ -21,18 +21,13 @@ function Secone() {
   useEffect(() => {
     const fetchConfiguration = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/configuration");
-        if (response.ok) {
-          const data = await response.json();
-          setFormData(data); // Set the fetched configuration data
-        } else {
-          console.error("Failed to fetch configuration");
-        }
+        const response = await axios.get("http://localhost:8080/api/configuration");
+        setFormData(response.data); // Set the fetched configuration data
       } catch (error) {
         console.error("Error fetching configuration:", error);
       }
     };
-
+  
     fetchConfiguration();
   }, []);
 
@@ -48,13 +43,11 @@ function Secone() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/configuration/update", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const response = await axios.post("http://localhost:8080/api/configuration/update", formData, {
+        headers: { "Content-Type": "application/json" }
       });
-
-      if (response.ok) {
+  
+      if (response.status === 200) {
         setShowModal(true);
         console.log("Configuration updated successfully.");
       } else {
