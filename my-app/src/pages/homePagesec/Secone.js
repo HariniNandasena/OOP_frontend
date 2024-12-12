@@ -9,7 +9,8 @@ function Secone() {
     customerRetrievalRate: '',
     maxTicketCapacity: '',
     numVendors: '',
-    numCustomers: ''
+    numCustomers: '',
+    ticketsToSell: ''
   });
   const [showModal, setShowModal] = useState(false);
   const [activityLog, setActivityLog] = useState([]);
@@ -136,6 +137,15 @@ function Secone() {
               onChange={handleChange}
             />
           </label>
+          <label>
+            Number of tickets one veondor intends to sell:
+            <input
+              type="number"
+              name="ticketsToSell"
+              value={formData.ticketsToSell}
+              onChange={handleChange}
+            />
+          </label>
           <div className="btnsubmit">
             <button type="submit" className="btn btn-primary">Update Configuration</button>
           </div>
@@ -160,6 +170,8 @@ function Secone() {
                   <p>Max Ticket Capacity: {formData.maxTicketCapacity}</p>
                   <p>Number of Vendors: {formData.numVendors}</p>
                   <p>Number of Customers: {formData.numCustomers}</p>
+                  <p>Number of tickets one vender intends to sell: {formData.ticketsToSell}</p>
+
 
                   <div className="control-buttons">
                     <button onClick={handleStart} className="btn btn-success" >Start</button>
